@@ -1,1 +1,1 @@
-There nothing here.
+[![Azure Static Web Apps CI/CD](https://github.com/tobiasvinther/cinema-frontend/actions/workflows/azure-static-web-apps-calm-pond-08a41c203.yml/badge.svg)](https://github.com/tobiasvinther/cinema-frontend/actions/workflows/azure-static-web-apps-calm-pond-08a41c203.yml)
