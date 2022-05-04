@@ -20,6 +20,7 @@ export function makeTable() {
         let header = document.createElement('th');
         header.scope = "col";
         header.style.textAlign = "center"
+        header.style.width = "14.28%"
         let textNode = document.createTextNode(headerText);
         header.appendChild(textNode);
         headerRow.appendChild(header);
