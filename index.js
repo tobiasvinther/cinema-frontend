@@ -2,6 +2,7 @@ import "https://unpkg.com/navigo"  //Will create the global Navigo object used b
 
 import { loadJoke } from "./pages/joke/joke.js"
 import { addHandler } from "./pages/navigate/navigate.js";
+import { makeTable } from "./pages/products/products.js";
 import { renderText, setActiveLink, renderTemplate, loadTemplate} from "./utils.js"
 
 window.addEventListener("load", async () => {
@@ -24,6 +25,7 @@ window.addEventListener("load", async () => {
     .on("/about", () => renderTemplate(templateAbout, "content"))
     .on("/products", (match) => {
       renderTemplate(templateProducts, "content")
+      makeTable()
       if (match.params) {
         document.getElementById("selected-product-id").innerText = match.params.id
       }
