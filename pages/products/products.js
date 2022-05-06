@@ -42,7 +42,7 @@ export function makeTable() {
             cell.appendChild(aTag);
 
             aTag.appendChild(textNode);
-            cell.addEventListener("click", () =>{
+            cell.addEventListener("click", () =>{ //Dette stykke er til t få fat i tidspunktet fra showings
                 const movieTime = cell.innerText
                 //router.navigate("order-tickets")
             })
