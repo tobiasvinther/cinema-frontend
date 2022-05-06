@@ -1,7 +1,8 @@
 
 
+const hall = {"Hall": 1};
 const headers = ["Mandag", 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
-const dummyTimes = ['10:00', '12:00', '14:00']
+const dummyTimes = ['10:00', '12:00', '14:00', '16:00']
 
 
 export function makeTable() {
@@ -30,13 +31,24 @@ export function makeTable() {
 
     array.forEach(showTime => {
         let row = document.createElement('tr');
-        let cell = document.createElement('td');
-        cell.style.textAlign = "center"
-        let textNode = document.createTextNode(showTime);
+        for (let i = 0; i <7; i++) {
+            let cell = document.createElement('td');
+            cell.style.textAlign = "center"
+            let textNode = document.createTextNode(showTime);
 
-        cell.appendChild(textNode);
-        row.appendChild(cell);
-        tableBody.appendChild(row);
+            let aTag = document.createElement('a')// det er et aTag. Man kan lave any tag fra html
+            aTag.href = "/order-tickets"
+            aTag.dataset.navigo = "";
+            cell.appendChild(aTag);
+
+            aTag.appendChild(textNode);
+            cell.addEventListener("click", () =>{
+                const movieTime = cell.innerText
+                //router.navigate("order-tickets")
+            })
+            row.appendChild(cell);
+            tableBody.appendChild(row);
+
+        }
     });
-
 }

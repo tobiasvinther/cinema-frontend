@@ -10,6 +10,7 @@ window.addEventListener("load", async () => {
   const templateHome = await loadTemplate("./pages/home/home.html")
   const templateAbout = await loadTemplate("./pages/about/about.html")
   const templateProducts = await loadTemplate("./pages/products/products.html")
+  const templateOrderTicket = await loadTemplate("./pages/order-tickets/orderTickets.html")
   const templateJoke = await loadTemplate("./pages/joke/joke.html")
   const templateNavigate = await loadTemplate("./pages/navigate/navigate.html")
 
@@ -39,6 +40,9 @@ window.addEventListener("load", async () => {
       renderTemplate(templateNavigate, "content")
       addHandler(router)
    })
+    .on("/order-tickets", () => {
+      renderTemplate(templateOrderTicket, "content")
+    })
     .notFound(() => renderText("No page for this route found", "content"))
     .resolve()
 });
