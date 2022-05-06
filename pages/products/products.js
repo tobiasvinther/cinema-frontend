@@ -7,16 +7,51 @@ function encode(str) {
     return str;
 }
 
+function setDates() {
+   
+    //maybe refactor to use a loop or something
+
+    var day1 = new Date()
+    var day2 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+1);
+    var day3 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+2);
+    var day4 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+3);
+    var day5 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+4);
+    var day6 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+5);
+    var day7 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+6);
+
+    //day1 = day1.toJSON().slice(5,10).replace(/(^|-)0+/g, "/")
+    day1 = day1.toLocaleDateString("en-GB").slice(0,5)
+    day2 = day2.toLocaleDateString("en-GB").slice(0,5)
+    day3 = day3.toLocaleDateString("en-GB").slice(0,5)
+    day4 = day4.toLocaleDateString("en-GB").slice(0,5)
+    day5 = day5.toLocaleDateString("en-GB").slice(0,5)
+    day6 = day6.toLocaleDateString("en-GB").slice(0,5)
+    day7 = day7.toLocaleDateString("en-GB").slice(0,5)
+
+    dates.push(day1)
+    dates.push(day2)
+    dates.push(day3)
+    dates.push(day4)
+    dates.push(day5)
+    dates.push(day6)
+    dates.push(day7)
+
+    console.log(dates)
+}
+
 //const URL = "https://cinema-sem3-backend.azurewebsites.net/api/movies"
 const URL = "http://localhost:8080/api/movies"
 
 const days = ["Mandag", 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
-const dates = ["4/5", '5/5', '6/5', '7/5', '8/5', '9/5', '10/5'];
+//const dates = ["4/5", '5/5', '6/5', '7/5', '8/5', '9/5', '10/5'];
+const dates = []
 const dummyTimes = ['10:00', '12:00', '14:00']
 
 
 
 export function makeTable() {
+
+    setDates()
 
     //let movieList
 
@@ -29,6 +64,7 @@ export function makeTable() {
         //document.getElementById("poster-id").src = fetchedMovies[0].posterLink
 
         fetchedMovies.forEach(movie => {
+            console.log("Im creating a table for: " + movie.name)
             let movieTitle = document.createElement('h2')
             document.getElementById("fetch-test-id").appendChild(movieTitle)
             movieTitle.innerText = movie.name
@@ -89,8 +125,12 @@ export function makeTable() {
                         </table>
                     </div>
                     </div>
-                `  
+                ` 
+
                 document.getElementById("tables-container-id").innerHTML = createdTable
+                //let spanToAppend = document.createElement('span')
+                //spanToAppend.append(document.getElementById("tables-container-id"))
+                //spanToAppend.innerHTML = createdTable
                 
 
             /*
