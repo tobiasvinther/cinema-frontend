@@ -59,15 +59,33 @@ export function makeTable() {
     .then(res => res.json())
     //.then(data => movieList = data)
     .then(fetchedMovies => {
-        console.log("hello there")
+        //console.log("hello there")
         //document.getElementById("title-id").innerText = fetchedMovies[0].name
         //document.getElementById("poster-id").src = fetchedMovies[0].posterLink
 
         fetchedMovies.forEach(movie => {
+
+
             console.log("Im creating a table for: " + movie.name)
-            let movieTitle = document.createElement('h2')
-            document.getElementById("fetch-test-id").appendChild(movieTitle)
-            movieTitle.innerText = movie.name
+            //let movieTitle = document.createElement('h2')
+            //document.getElementById("fetch-test-id").appendChild(movieTitle)
+            //movieTitle.innerText = movie.name
+
+            movie.showings.forEach(showings => {
+                console.log("Date and time for showing: " + showings.date + " " + showings.time)
+                
+                let showingDateFormatted = showings.date.slice(5,10).replace(/-/g, "/")
+                //let showingDateFormattedAndStringified = String(showingDateFormatted).split("").reverse().join("")
+                //let showingDateFormatted = showings.date.toLocaleDateString("en-GB").slice(0,5)
+
+                console.log("Date and time for showing: " + showingDateFormatted + " " + showings.time)
+            })
+
+            /*
+            movie.forEach(showing => {
+                console.log("Showing at date: " + showing.date)
+            })
+            */
 
             const createdTable =  
                 `
@@ -127,11 +145,21 @@ export function makeTable() {
                     </div>
                 ` 
 
-                document.getElementById("tables-container-id").innerHTML = createdTable
+                document.getElementById("tables-container-id").innerHTML = createdTable //currently each cycle of the loop will overwrite the last
+
                 //let spanToAppend = document.createElement('span')
-                //spanToAppend.append(document.getElementById("tables-container-id"))
+                // spanToAppend.append(document.getElementById("tables-container-id"))
                 //spanToAppend.innerHTML = createdTable
                 
+
+
+
+
+
+
+
+
+
 
             /*
             let tablesArea = document.getElementById('tables-area-id')
