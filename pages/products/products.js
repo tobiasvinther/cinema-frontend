@@ -8,25 +8,25 @@ function encode(str) {
 }
 
 function setDates() {
-   
+
     //maybe refactor to use a loop or something
 
     var day1 = new Date()
-    var day2 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+1);
-    var day3 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+2);
-    var day4 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+3);
-    var day5 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+4);
-    var day6 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+5);
-    var day7 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate()+6);
+    var day2 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 1);
+    var day3 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 2);
+    var day4 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 3);
+    var day5 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 4);
+    var day6 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 5);
+    var day7 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 6);
 
     //day1 = day1.toJSON().slice(5,10).replace(/(^|-)0+/g, "/")
-    day1 = day1.toLocaleDateString("en-GB").slice(0,5)
-    day2 = day2.toLocaleDateString("en-GB").slice(0,5)
-    day3 = day3.toLocaleDateString("en-GB").slice(0,5)
-    day4 = day4.toLocaleDateString("en-GB").slice(0,5)
-    day5 = day5.toLocaleDateString("en-GB").slice(0,5)
-    day6 = day6.toLocaleDateString("en-GB").slice(0,5)
-    day7 = day7.toLocaleDateString("en-GB").slice(0,5)
+    day1 = day1.toLocaleDateString("en-GB").slice(0, 5)
+    day2 = day2.toLocaleDateString("en-GB").slice(0, 5)
+    day3 = day3.toLocaleDateString("en-GB").slice(0, 5)
+    day4 = day4.toLocaleDateString("en-GB").slice(0, 5)
+    day5 = day5.toLocaleDateString("en-GB").slice(0, 5)
+    day6 = day6.toLocaleDateString("en-GB").slice(0, 5)
+    day7 = day7.toLocaleDateString("en-GB").slice(0, 5)
 
     dates.push(day1)
     dates.push(day2)
@@ -41,15 +41,15 @@ function setDates() {
 
 let weekDates = []
 let today = new Date
-today.toLocaleDateString("en-GB").slice(0,5)
+today.toLocaleDateString("en-GB").slice(0, 5)
 
 function setDates1() {
     let curr = new Date
-   
+
     for (let i = 1; i <= 7; i++) {
         let first = curr.getDate() - curr.getDay() + i
         //let day = new Date(curr.setDate(first)).toISOString().slice(0, 10)
-        let day = new Date(curr.setDate(first)).toLocaleDateString("en-GB").slice(0,5)
+        let day = new Date(curr.setDate(first)).toLocaleDateString("en-GB").slice(0, 5)
         weekDates.push(day)
     }
     console.log(weekDates)
@@ -72,41 +72,41 @@ export function makeTable() {
 
     //setDates()
     setDates1() //test
-    today.toLocaleDateString("en-GB").slice(0,5)
+    today.toLocaleDateString("en-GB").slice(0, 5)
     console.log("Today is: " + today)
 
     //let movieList
 
     fetch(URL)
-    .then(res => res.json())
-    //.then(data => movieList = data)
-    .then(fetchedMovies => {
-        //console.log("hello there")
-        //document.getElementById("title-id").innerText = fetchedMovies[0].name
-        //document.getElementById("poster-id").src = fetchedMovies[0].posterLink
+        .then(res => res.json())
+        //.then(data => movieList = data)
+        .then(fetchedMovies => {
+            //console.log("hello there")
+            //document.getElementById("title-id").innerText = fetchedMovies[0].name
+            //document.getElementById("poster-id").src = fetchedMovies[0].posterLink
 
-        fetchedMovies.forEach(movie => {
+            fetchedMovies.forEach(movie => {
 
-            const movieId = movie.id
-            console.log("Im creating a table for: " + movie.name)
-            //let movieTitle = document.createElement('h2')
-            //document.getElementById("fetch-test-id").appendChild(movieTitle)
-            //movieTitle.innerText = movie.name
+                const movieId = movie.id
+                console.log("Im creating a table for: " + movie.name)
+                //let movieTitle = document.createElement('h2')
+                //document.getElementById("fetch-test-id").appendChild(movieTitle)
+                //movieTitle.innerText = movie.name
 
-            movie.showings.forEach(showings => {
-                console.log("Date and time for showing: " + showings.date + " " + showings.time)
-                
-                let showingDateFormatted = showings.date.slice(5,10).replace(/-/g, "/")
-                //let showingDateFormattedAndStringified = String(showingDateFormatted).split("").reverse().join("")
-                //let showingDateFormatted = showings.date.toLocaleDateString("en-GB").slice(0,5)
+                movie.showings.forEach(showings => {
+                    console.log("Date and time for showing: " + showings.date + " " + showings.time)
 
-                console.log("Date and time for showing: " + showingDateFormatted + " " + showings.time)
-            })
+                    let showingDateFormatted = showings.date.slice(5, 10).replace(/-/g, "/")
+                    //let showingDateFormattedAndStringified = String(showingDateFormatted).split("").reverse().join("")
+                    //let showingDateFormatted = showings.date.toLocaleDateString("en-GB").slice(0,5)
 
-            
+                    console.log("Date and time for showing: " + showingDateFormatted + " " + showings.time)
+                })
 
-            const createdTable =  
-                `
+
+
+                const createdTable =
+                    `
                 <div class="row">
                     <h3 style="line-height: 1.0;">${encode(movie.name)}</h3>
                     <hr>
@@ -167,19 +167,19 @@ export function makeTable() {
                         </table>
                     </div>
                     </div>
-                ` 
+                `
 
                 document.getElementById("tables-container-id").innerHTML = createdTable //currently each cycle of the loop will overwrite the last
 
                 //let spanToAppend = document.createElement('span')
                 //spanToAppend.innerHTML = createdTable
                 //spanToAppend.append(tableContainer)
-                
-                
+
+
                 const headers = document.querySelectorAll('th')
                 headers.forEach(header => {
                     //todo: get this to work
-                    if(header.innerText < today) {
+                    if (header.innerText < today) {
                         header.style.color = "grey"
                     }
                 })
@@ -188,107 +188,56 @@ export function makeTable() {
                 //todo: put them in at correct dates
                 movie.showings.forEach(showing => {
 
-                    console.log("Showing " + showing.id +  " at date: " + showing.date)
+                    console.log("Showing " + showing.id + " at date: " + showing.date)
 
                     //let row = document.createElement('tr');
                     let row = document.getElementById("row-time-1000-" + movieId)
                     let cell = document.createElement('td')
 
                     cell.style.textAlign = "center"
-                    let textNode = document.createTextNode(String(showing.time).slice(0,5));
- 
+                    let textNode = document.createTextNode(String(showing.time).slice(0, 5));
+
                     //find out which row to put it, based on showing time
-                    if(textNode.nodeValue == "10:00") {
+                    if (textNode.nodeValue == "10:00") {
                         console.log("It's 10")
                         row = document.getElementById("row-time-1000-" + movieId)
-                    } else if(textNode.nodeValue == "12:45") {
+                    } else if (textNode.nodeValue == "12:45") {
                         console.log("It's 12:45")
                         row = document.getElementById("row-time-1245-" + movieId)
-                    } else if(textNode.nodeValue == "14:30") {
+                    } else if (textNode.nodeValue == "14:30") {
                         console.log("It's 14:30")
                         row = document.getElementById("row-time-1430-" + movieId)
-                    } else if(textNode.nodeValue == "17:15") {
+                    } else if (textNode.nodeValue == "17:15") {
                         console.log("It's 17:15")
                         row = document.getElementById("row-time-1715-" + movieId)
-                    } else if(textNode.nodeValue == "20:00") {
+                    } else if (textNode.nodeValue == "20:00") {
                         console.log("It's 20:00")
                         row = document.getElementById("row-time-2000-" + movieId)
                     }
                     row.appendChild(cell);
                     cell.appendChild(textNode);
-                    
 
-                    let tbody = document.getElementById("tbody-id-" + movieId)
+
+                    //let tbody = document.getElementById("tbody-id-" + movieId)
 
                     //tbody.appendChild(row);
 
                     //&#8205;
 
                 })
-                
 
-            /*
-            let tablesArea = document.getElementById('tables-area-id')
-            let movieTable = document.createElement('table')
-            movieTable.class = "table"
-            movieTable.append(tablesArea)
-            let movieTableHead = document.createElement('thead')
-            movieTableHead.append(movieTable)
-            let moiveTbody = document.createElement('tbody')
-            movieTableHead.append(moiveTbody)
-            let headerRow = document.createElement('tr')
-            
-            days.forEach(headerText => {
-                let header = document.createElement('th')
-                header.scope = "col"
-                header.style.textAlign = "center"
-                header.style.width = "14.28%"
-                let textNode = document.createTextNode(headerText)
-                header.appendChild(textNode)
-                headerRow.appendChild(header)
-                console.log("hi")
-            });
-        
-            movieTableHead.appendChild(headerRow);
-            */
+                function setCellBlank(rowId) {
+                    let row = document.getElementById("row-time-" + rowId + "-" + 2)
+                    let cell = document.createElement('td')
+                    cell.style.textAlign = "center"
+                    let textNode = document.createTextNode("n/a")
+                    row.appendChild(cell);
+                    cell.appendChild(textNode);
+                }
+
+
+            })
 
         })
-    })
-    /*
-    let array = dummyTimes
-
-    
-    //const table = document.getElementById('movie-table-id')
-    const tableHeader = document.getElementById('movie-header-id')
-    const tableBody = document.getElementById('movie-body-id')
-
-    //let existingRowsToRemove = document.querySelectorAll('tr');
-    //existingRowsToRemove.forEach(row => row.remove());
-    let headerRow = document.createElement('tr')
-
-    days.forEach(headerText => {
-        let header = document.createElement('th')
-        header.scope = "col"
-        header.style.textAlign = "center"
-        header.style.width = "14.28%"
-        let textNode = document.createTextNode(headerText)
-        header.appendChild(textNode)
-        headerRow.appendChild(header)
-    });
-
-    tableHeader.appendChild(headerRow);
-
-    array.forEach(showTime => {
-        let row = document.createElement('tr');
-        let cell = document.createElement('td');
-        cell.style.textAlign = "center"
-        let textNode = document.createTextNode(showTime);
-
-        cell.appendChild(textNode);
-        row.appendChild(cell);
-        tableBody.appendChild(row);
-    });
-*/
-   
-
 }
+
