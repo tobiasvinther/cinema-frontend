@@ -15,7 +15,7 @@ export function makeTable() {
 
     //let existingRowsToRemove = document.querySelectorAll('tr');
     //existingRowsToRemove.forEach(row => row.remove());
-    let headerRow = document.createElement('tr');
+    let headerRow = document.createElement('tr');//headerRow er en parrent til header. header er en parrent til textNode.
 
     headers.forEach(headerText => {
         let header = document.createElement('th');
@@ -23,8 +23,8 @@ export function makeTable() {
         header.style.textAlign = "center"
         header.style.width = "14.28%"
         let textNode = document.createTextNode(headerText);
-        header.appendChild(textNode);
-        headerRow.appendChild(header);
+        header.appendChild(textNode);//I den firkantede collonne der skal teksten være fx. "Mandag"
+        headerRow.appendChild(header);//headerRowet der skal firkanten collonne være
     });
 
     tableHeader.appendChild(headerRow);
