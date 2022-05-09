@@ -39,6 +39,23 @@ function setDates() {
     console.log(dates)
 }
 
+let weekDates = []
+let today = new Date
+today.toLocaleDateString("en-GB").slice(0,5)
+
+function setDates1() {
+    let curr = new Date
+   
+    for (let i = 1; i <= 7; i++) {
+        let first = curr.getDate() - curr.getDay() + i
+        //let day = new Date(curr.setDate(first)).toISOString().slice(0, 10)
+        let day = new Date(curr.setDate(first)).toLocaleDateString("en-GB").slice(0,5)
+        weekDates.push(day)
+    }
+    console.log(weekDates)
+
+}
+
 //const URL = "https://cinema-sem3-backend.azurewebsites.net/api/movies"
 const URL = "http://localhost:8080/api/movies"
 
@@ -51,7 +68,12 @@ const dummyTimes = ['10:00', '12:00', '14:00']
 
 export function makeTable() {
 
-    setDates()
+    const tableContainer = document.getElementById("tables-container-id")
+
+    //setDates()
+    setDates1() //test
+    today.toLocaleDateString("en-GB").slice(0,5)
+    console.log("Today is: " + today)
 
     //let movieList
 
@@ -65,7 +87,7 @@ export function makeTable() {
 
         fetchedMovies.forEach(movie => {
 
-
+            const movieId = movie.id
             console.log("Im creating a table for: " + movie.name)
             //let movieTitle = document.createElement('h2')
             //document.getElementById("fetch-test-id").appendChild(movieTitle)
@@ -81,11 +103,7 @@ export function makeTable() {
                 console.log("Date and time for showing: " + showingDateFormatted + " " + showings.time)
             })
 
-            /*
-            movie.forEach(showing => {
-                console.log("Showing at date: " + showing.date)
-            })
-            */
+            
 
             const createdTable =  
                 `
@@ -102,41 +120,47 @@ export function makeTable() {
                                 <tr>
                                     <th scope="col" style="text-align: center; width: 14.28%;">
                                         <span class="d-none d-xl-block">Mandag</span>
-                                        <span class="date">${encode(dates[0])}</span>
+                                        <span id="th-mon-id" class="date">${encode(weekDates[0])}</span>
                                     </th>
                                     <th scope="col" style="text-align: center; width: 14.28%;">
                                         <span class="d-none d-xl-block">Tirsdag</span>
-                                        <span class="date">${encode(dates[1])}</span>
+                                        <span class="date">${encode(weekDates[1])}</span>
                                     </th>
                                     <th scope="col" style="text-align: center; width: 14.28%;">
                                         <span class="d-none d-xl-block">Onsdag</span>
-                                        <span class="date">${encode(dates[2])}</span>
+                                        <span class="date">${encode(weekDates[2])}</span>
                                     </th>
                                     <th scope="col" style="text-align: center; width: 14.28%;">
                                         <span class="d-none d-xl-block">Torsdag</span>
-                                        <span class="date">${encode(dates[3])}</span>
+                                        <span class="date">${encode(weekDates[3])}</span>
                                     </th>
                                     <th scope="col" style="text-align: center; width: 14.28%;">
                                         <span class="d-none d-xl-block">Fredag</span>
-                                        <span class="date">${encode(dates[4])}</span>
+                                        <span class="date">${encode(weekDates[4])}</span>
                                     </th>
                                     <th scope="col" style="text-align: center; width: 14.28%;">
                                         <span class="d-none d-xl-block">Lørdag</span>
-                                        <span class="date">${encode(dates[5])}</span>
+                                        <span class="date">${encode(weekDates[5])}</span>
                                     </th>
                                     <th scope="col" style="text-align: center; width: 14.28%;">
                                         <span class="d-none d-xl-block">Søndag</span>
-                                        <span class="date">${encode(dates[6])}</span>
+                                        <span class="date">${encode(weekDates[6])}</span>
                                     </th>
                                 </tr>
-                                <tbody>
-                                    <tr>
-                                        <td style="text-align: center;">10:00</td>
-                                        <td style="text-align: center;">10:00</td>
+                                <tbody id="tbody-id-${movie.id}">
+                                    <tr id="row-time-1000-${movie.id}">
                                     </tr>
-                                    <tr>
-                                        <td style="text-align: center;">12:00</td>
-                                        <td style="text-align: center;">12:00</td>
+                                    <tr id="row-time-1245-${movie.id}">
+                                     
+                                    </tr>
+                                    <tr id="row-time-1430-${movie.id}">
+                                        
+                                    </tr>
+                                    <tr id="row-time-1715-${movie.id}">
+                                        
+                                    </tr>
+                                    <tr id="row-time-2000-${movie.id}">
+                                        
                                     </tr>
                                 <tbody>
                             </thead>
@@ -148,18 +172,60 @@ export function makeTable() {
                 document.getElementById("tables-container-id").innerHTML = createdTable //currently each cycle of the loop will overwrite the last
 
                 //let spanToAppend = document.createElement('span')
-                // spanToAppend.append(document.getElementById("tables-container-id"))
                 //spanToAppend.innerHTML = createdTable
+                //spanToAppend.append(tableContainer)
                 
+                
+                const headers = document.querySelectorAll('th')
+                headers.forEach(header => {
+                    //todo: get this to work
+                    if(header.innerText < today) {
+                        header.style.color = "grey"
+                    }
+                })
 
+                //in each movie, for each showing to this:
+                //todo: put them in at correct dates
+                movie.showings.forEach(showing => {
 
+                    console.log("Showing " + showing.id +  " at date: " + showing.date)
 
+                    //let row = document.createElement('tr');
+                    let row = document.getElementById("row-time-1000-" + movieId)
+                    let cell = document.createElement('td')
 
+                    cell.style.textAlign = "center"
+                    let textNode = document.createTextNode(String(showing.time).slice(0,5));
+ 
+                    //find out which row to put it, based on showing time
+                    if(textNode.nodeValue == "10:00") {
+                        console.log("It's 10")
+                        row = document.getElementById("row-time-1000-" + movieId)
+                    } else if(textNode.nodeValue == "12:45") {
+                        console.log("It's 12:45")
+                        row = document.getElementById("row-time-1245-" + movieId)
+                    } else if(textNode.nodeValue == "14:30") {
+                        console.log("It's 14:30")
+                        row = document.getElementById("row-time-1430-" + movieId)
+                    } else if(textNode.nodeValue == "17:15") {
+                        console.log("It's 17:15")
+                        row = document.getElementById("row-time-1715-" + movieId)
+                    } else if(textNode.nodeValue == "20:00") {
+                        console.log("It's 20:00")
+                        row = document.getElementById("row-time-2000-" + movieId)
+                    }
+                    row.appendChild(cell);
+                    cell.appendChild(textNode);
+                    
 
+                    let tbody = document.getElementById("tbody-id-" + movieId)
 
+                    //tbody.appendChild(row);
 
+                    //&#8205;
 
-
+                })
+                
 
             /*
             let tablesArea = document.getElementById('tables-area-id')
