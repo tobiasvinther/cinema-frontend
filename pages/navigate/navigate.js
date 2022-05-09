@@ -4,3 +4,10 @@ export function addHandler(router) {
         router.navigate(route)
     }
 }
+
+export function addHandlerLink(router) {
+    document.getElementById("btn").onclick = () => {
+        const route = document.getElementById("btn").value
+        router.navigate(route)
+    }
+}

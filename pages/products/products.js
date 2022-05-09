@@ -40,7 +40,6 @@ export function makeTable() {
             aTag.href = "/order-tickets"
             aTag.dataset.navigo = "";
             cell.appendChild(aTag);
-
             aTag.appendChild(textNode);
             cell.addEventListener("click", () =>{ //Dette stykke er til t få fat i tidspunktet fra showings
                 const movieTime = cell.innerText
