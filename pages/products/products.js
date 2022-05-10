@@ -107,7 +107,7 @@ export function makeTable() {
 
                 const createdTable =
                     `
-                <div class="row">
+                <div class="row mt-3">
                     <h3 style="line-height: 1.0;">${encode(movie.name)}</h3>
                     <hr>
                     <div class="col-2">
@@ -167,15 +167,16 @@ export function makeTable() {
                         </table>
                     </div>
                     </div>
+                    <div class="my-4">\u0020</div>
                 `
 
-                document.getElementById("tables-container-id").innerHTML = createdTable //currently each cycle of the loop will overwrite the last
+                //document.getElementById("tables-container-id").innerHTML = createdTable //currently each cycle of the loop will overwrite the last
 
-                //let spanToAppend = document.createElement('span')
-                //spanToAppend.innerHTML = createdTable
-                //spanToAppend.append(tableContainer)
-
-
+                let spanToAppend = document.createElement('span')
+                spanToAppend.innerHTML = createdTable
+                tableContainer.appendChild(spanToAppend)
+                
+                //trying to color dates that are before today's date grey
                 const headers = document.querySelectorAll('th')
                 headers.forEach(header => {
                     //todo: get this to work
