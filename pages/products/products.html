@@ -6,35 +6,31 @@
     }
   </style>
 
-  <div class="container">
-    <div class="row">
-      <h3 id="title-id" style="line-height: 1.0;">The Northman</h3>
-      <hr>
-      <div class="col-2">
-        <img id="poster-id" src="https://media-cache.cinematerial.com/p/500x/xdjtp2kt/the-northman-movie-poster.jpg?v=1648567125" alt=""
-        width="270" height="">
-      </div>
-      <div class="col-1">
-      </div>
-      <div class="col-9">
-        <table class="table" id="movie-table-id">
-          <thead id="movie-header-id">
-          </thead>
-          <tbody id="movie-body-id"></tbody>
-        </table>
+  <div class="container" id="tables-container-id" style="background-color: white;">
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Beskrivelse</h5>
+        </div>
+        <div class="modal-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+        </div>
       </div>
     </div>
-    <hr>
-    <!--
-    <ul>
-      <li><a href="/products?id=JavaScript" data-navigo>Learn JavaScript</a></li>
-      <li><a href="/products?id=routing" data-navigo>Learn Client Side Routing</a></li>
-      <li><a href="/products?id=components" data-navigo>Learn to structure code</a></li>
-    </ul>
-    <div>
-      <h2>Selected Product</h2>
-      <p id="selected-product-id"></p>
-    </div>
-    -->
+  </div>
+
+  <div id="fetch-test-id"></div>
+
   </div>
 </template>

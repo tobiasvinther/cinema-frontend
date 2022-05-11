@@ -1,10 +1,11 @@
 import "https://unpkg.com/navigo"  //Will create the global Navigo object used below
 
 import { loadJoke } from "./pages/joke/joke.js"
+import { createList } from "./pages/movielist/movielist.js";
+import { addHandler } from "./pages/navigate/navigate.js";
 import {addHandler, addHandlerLink} from "./pages/navigate/navigate.js";
 import { makeTable } from "./pages/products/products.js";
 import { renderText, setActiveLink, renderTemplate, loadTemplate} from "./utils.js"
-//import {addTicketOrder} from "./pages/order-tickets/orderTickets";
 
 window.addEventListener("load", async () => {
 
@@ -15,6 +16,7 @@ window.addEventListener("load", async () => {
   const templateTicketOrdered = await loadTemplate("./pages/order-tickets/ticket-ordered.html")
   const templateJoke = await loadTemplate("./pages/joke/joke.html")
   const templateNavigate = await loadTemplate("./pages/navigate/navigate.html")
+  const templateMovieList = await loadTemplate("./pages/movielist/movielist.html")
 
   const router = new Navigo("/", { hash: true });
   router
@@ -34,14 +36,13 @@ window.addEventListener("load", async () => {
       }
     })
     .on("/joke", () => {
-      renderTemplate(templateJoke, "content")
-      loadJoke()
+      renderTemplate(templateMovieList, "content")
+      createList()
     })
     .on("/show-match", (match) => renderText(`<pre>${JSON.stringify(match, null, 2)}</pre>`, "content"))
     .on("/navigate-programatically", () => {
       renderTemplate(templateNavigate, "content")
       addHandler(router)
-      //addTicketOrder()
    })
     .on("/order-tickets", () => {
       renderTemplate(templateOrderTicket, "content")
