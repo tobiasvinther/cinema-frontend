@@ -34,11 +34,18 @@ export function makeTable() {
         //.then(data => movieList = data)
         .then(fetchedMovies => {
 
+
             //loop through each movie
             fetchedMovies.forEach(movie => {
 
                 const movieId = movie.id
                 console.log("Im creating a table for: " + movie.name)
+
+                //modal stuff (not working correcetly)
+                let exampleModal = document.getElementById('exampleModal')
+                let modalTitle = exampleModal.querySelector('.modal-title')
+                modalTitle.innerText = movie.name
+
 
                 //create formattede showing dates for the week
                 movie.showings.forEach(showings => {
@@ -113,7 +120,7 @@ export function makeTable() {
                             </thead>
                         </table>
                         <span class="d-grid gap-2">
-                            <a class="btn btn-secondary" href="#/" role="button">Læs om filmen</a>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Læs om filmen</button>
                         </span>
                     </div>
                 </div>
@@ -173,36 +180,26 @@ export function makeTable() {
                         console.log("It's 10")
                         console.log("Day int is: " + showingDateAsInt + ", " + typeof showingDateAsInt)
                         document.getElementById("row-time-1000-" + movieId).cells[showingDateAsInt].innerHTML = `<a style="text-decoration:none; color: black;" href="#/" role="button">${textNode.nodeValue}</a>`
-                        //document.getElementById("row-time-1000-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
                         
                     } else if (textNode.nodeValue == "12:45") {
                         console.log("It's 12:45")
                         row = document.getElementById("row-time-1245-" + movieId)
-                        document.getElementById("row-time-1245-" + movieId).cells[showingDateAsInt].innerHTML = textNode.nodeValue
-                        document.getElementById("row-time-1245-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
-                        /*
-                        for(let i=0; i < 6; i++) {
-                            if(i < showingDateAsInt) {
-                                let cell = document.createElement('td')
-                                row.appendChild(cell);
-                            }
-                        }
-                        */
+                        document.getElementById("row-time-1245-" + movieId).cells[showingDateAsInt].innerHTML = `<a style="text-decoration:none; color: black;" href="#/" role="button">${textNode.nodeValue}</a>`
+                      
                     } else if (textNode.nodeValue == "14:30") {
                         console.log("It's 14:30")
                         row = document.getElementById("row-time-1430-" + movieId)
-                        document.getElementById("row-time-1430-" + movieId).cells[showingDateAsInt].innerHTML = textNode.nodeValue
-                        document.getElementById("row-time-1430-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
+                        document.getElementById("row-time-1430-" + movieId).cells[showingDateAsInt].innerHTML = `<a style="text-decoration:none; color: black;" href="#/" role="button">${textNode.nodeValue}</a>`
+                    
                     } else if (textNode.nodeValue == "17:15") {
                         console.log("It's 17:15")
                         row = document.getElementById("row-time-1715-" + movieId)
-                        document.getElementById("row-time-1715-" + movieId).cells[showingDateAsInt].innerHTML = textNode.nodeValue
-                        document.getElementById("row-time-1715-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
+                        document.getElementById("row-time-1715-" + movieId).cells[showingDateAsInt].innerHTML = `<a style="text-decoration:none; color: black;" href="#/" role="button">${textNode.nodeValue}</a>`
+                    
                     } else if (textNode.nodeValue == "20:00") {
                         console.log("It's 20:00")
                         row = document.getElementById("row-time-2000-" + movieId)
-                        document.getElementById("row-time-2000-" + movieId).cells[showingDateAsInt].innerHTML = textNode.nodeValue
-                        document.getElementById("row-time-2000-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
+                        document.getElementById("row-time-2000-" + movieId).cells[showingDateAsInt].innerHTML = `<a style="text-decoration:none; color: black;" href="#/" role="button">${textNode.nodeValue}</a>`
                     }
 
                 })
