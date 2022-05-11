@@ -1,43 +1,5 @@
-function encode(str) {
-    str = str.replace(/&/g, "&amp;");
-    str = str.replace(/>/g, "&gt;");
-    str = str.replace(/</g, "&lt;");
-    str = str.replace(/"/g, "&quot;");
-    str = str.replace(/'/g, "&#039;");
-    return str;
-}
-
-function setDates() {
-
-    //maybe refactor to use a loop or something
-
-    var day1 = new Date()
-    var day2 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 1);
-    var day3 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 2);
-    var day4 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 3);
-    var day5 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 4);
-    var day6 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 5);
-    var day7 = new Date(day1.getFullYear(), day1.getMonth(), day1.getDate() + 6);
-
-    //day1 = day1.toJSON().slice(5,10).replace(/(^|-)0+/g, "/")
-    day1 = day1.toLocaleDateString("en-GB").slice(0, 5)
-    day2 = day2.toLocaleDateString("en-GB").slice(0, 5)
-    day3 = day3.toLocaleDateString("en-GB").slice(0, 5)
-    day4 = day4.toLocaleDateString("en-GB").slice(0, 5)
-    day5 = day5.toLocaleDateString("en-GB").slice(0, 5)
-    day6 = day6.toLocaleDateString("en-GB").slice(0, 5)
-    day7 = day7.toLocaleDateString("en-GB").slice(0, 5)
-
-    dates.push(day1)
-    dates.push(day2)
-    dates.push(day3)
-    dates.push(day4)
-    dates.push(day5)
-    dates.push(day6)
-    dates.push(day7)
-
-    console.log(dates)
-}
+//const URL = "https://cinema-sem3-backend.azurewebsites.net/api/movies"
+const URL = "http://localhost:8080/api/movies"
 
 let weekDates = []
 let today = new Date
@@ -56,16 +18,6 @@ function setDates1() {
 
 }
 
-//const URL = "https://cinema-sem3-backend.azurewebsites.net/api/movies"
-const URL = "http://localhost:8080/api/movies"
-
-const days = ["Mandag", 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
-//const dates = ["4/5", '5/5', '6/5', '7/5', '8/5', '9/5', '10/5'];
-const dates = []
-const dummyTimes = ['10:00', '12:00', '14:00']
-
-
-
 export function makeTable() {
 
     const tableContainer = document.getElementById("tables-container-id")
@@ -81,18 +33,14 @@ export function makeTable() {
         .then(res => res.json())
         //.then(data => movieList = data)
         .then(fetchedMovies => {
-            //console.log("hello there")
-            //document.getElementById("title-id").innerText = fetchedMovies[0].name
-            //document.getElementById("poster-id").src = fetchedMovies[0].posterLink
 
+            //loop through each movie
             fetchedMovies.forEach(movie => {
 
                 const movieId = movie.id
                 console.log("Im creating a table for: " + movie.name)
-                //let movieTitle = document.createElement('h2')
-                //document.getElementById("fetch-test-id").appendChild(movieTitle)
-                //movieTitle.innerText = movie.name
 
+                //create formattede showing dates for the week
                 movie.showings.forEach(showings => {
                     console.log("Date and time for showing: " + showings.date + " " + showings.time)
 
@@ -103,19 +51,17 @@ export function makeTable() {
                     console.log("Date and time for showing: " + showingDateFormatted + " " + showings.time)
                 })
 
-
-
                 const createdTable =
                     `
                 <div class="row mt-3">
-                    <h3 style="line-height: 1.0;">${encode(movie.name)}</h3>
-                    <hr>
+                    <h3 style="line-height: 1.0;" padding-left: 0px;>${encode(movie.name)}</h3>
+                    <hr/>
                     <div class="col-2">
-                        <img src="${encode(movie.posterLink)}" alt="" width="270" height="">
+                        <img src="${encode(movie.posterLink)}" alt="" width="220" height="">
                     </div>
                     <div class="col-1"></div>
                     <div class="col-9">
-                        <table class="table">
+                        <table class="table" id="table-id-${movie.id}">
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center; width: 14.28%;">
@@ -166,12 +112,13 @@ export function makeTable() {
                                 <tbody>
                             </thead>
                         </table>
+                        <span class="d-grid gap-2">
+                            <a class="btn btn-secondary" href="#/" role="button">Læs om filmen</a>
+                        </span>
                     </div>
-                    </div>
-                    <div class="my-4">\u0020</div>
+                </div>
+                <div class="my-4">\u0020</div>
                 `
-
-                //document.getElementById("tables-container-id").innerHTML = createdTable //currently each cycle of the loop will overwrite the last
 
                 let spanToAppend = document.createElement('span')
                 spanToAppend.innerHTML = createdTable
@@ -180,7 +127,6 @@ export function makeTable() {
                 //trying to color dates that are before today's date grey
                 const headers = document.querySelectorAll('th')
                 headers.forEach(header => {
-                    //todo: get this to work
                     if (header.innerText < today) {
                         header.style.color = "grey"
                     }
@@ -190,8 +136,22 @@ export function makeTable() {
                 //2. use showingDateAsInt to get the index of the specific cells we want (since it will be equal to the corresponding column)
                 //3. Use seomthing like document.getElementById("myTable").rows[0].cells[0].innerHTML to put in the data
 
-                //in each movie, for each showing to this:
-                //todo: put them in at correct dates
+                //loop through table and fill it with "empty" cells
+                for(let i=0; i <= 4; i++) {
+                    let row = document.getElementById("tbody-id-" + movieId).rows[i]
+                    console.log("I'm going through rows")
+                    for(let j=0; j <= 6; j++) {
+                        console.log("I'm creating cells")
+                        let cell = document.createElement('td')
+                        cell.style = "text-align: center"
+                        cell.innerText = "---"
+                        cell.style = "color: white; text-align: center;"
+                        row.appendChild(cell);
+                    }
+
+                }
+
+                //in each movie, for each showing:
                 movie.showings.forEach(showing => {
 
                     //find out which day of the week the showing is, in order to later put it in the right column
@@ -204,71 +164,61 @@ export function makeTable() {
                     }   else {
                             showingDateAsInt --
                         }
-                    
-                    //console.log("Showing " + showing.id + " at date: " + showing.date)
 
-                    //let row = document.createElement('tr');
                     let row = document.getElementById("row-time-1000-" + movieId)
-                    let cell = document.createElement('td')
-
-                    cell.style.textAlign = "center"
-                    let textNode = document.createTextNode(String(showing.time).slice(0, 5));
+                    let textNode = document.createTextNode(String(showing.time).slice(0, 5)); //stringify and shorten our timeslot
 
                     //find out which row to put it, based on showing time
                     if (textNode.nodeValue == "10:00") {
                         console.log("It's 10")
                         console.log("Day int is: " + showingDateAsInt + ", " + typeof showingDateAsInt)
-                        row = document.getElementById("row-time-1000-" + movieId)
-                        for(let i=0; i < 6; i++) {
-                            if(i < showingDateAsInt) {
-                                let cell = document.createElement('td')
-                                row.appendChild(cell);
-                            }
-                        }
+                        document.getElementById("row-time-1000-" + movieId).cells[showingDateAsInt].innerHTML = `<a style="text-decoration:none; color: black;" href="#/" role="button">${textNode.nodeValue}</a>`
+                        //document.getElementById("row-time-1000-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
                         
                     } else if (textNode.nodeValue == "12:45") {
                         console.log("It's 12:45")
                         row = document.getElementById("row-time-1245-" + movieId)
+                        document.getElementById("row-time-1245-" + movieId).cells[showingDateAsInt].innerHTML = textNode.nodeValue
+                        document.getElementById("row-time-1245-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
+                        /*
                         for(let i=0; i < 6; i++) {
                             if(i < showingDateAsInt) {
                                 let cell = document.createElement('td')
                                 row.appendChild(cell);
                             }
                         }
+                        */
                     } else if (textNode.nodeValue == "14:30") {
                         console.log("It's 14:30")
                         row = document.getElementById("row-time-1430-" + movieId)
+                        document.getElementById("row-time-1430-" + movieId).cells[showingDateAsInt].innerHTML = textNode.nodeValue
+                        document.getElementById("row-time-1430-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
                     } else if (textNode.nodeValue == "17:15") {
                         console.log("It's 17:15")
                         row = document.getElementById("row-time-1715-" + movieId)
+                        document.getElementById("row-time-1715-" + movieId).cells[showingDateAsInt].innerHTML = textNode.nodeValue
+                        document.getElementById("row-time-1715-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
                     } else if (textNode.nodeValue == "20:00") {
                         console.log("It's 20:00")
                         row = document.getElementById("row-time-2000-" + movieId)
+                        document.getElementById("row-time-2000-" + movieId).cells[showingDateAsInt].innerHTML = textNode.nodeValue
+                        document.getElementById("row-time-2000-" + movieId).cells[showingDateAsInt].style = "color: black; text-align: center;"
                     }
-                    row.appendChild(cell);
-                    cell.appendChild(textNode);
-
-
-                    //let tbody = document.getElementById("tbody-id-" + movieId)
-
-                    //tbody.appendChild(row);
-
-                    //&#8205;
 
                 })
-
-                function setCellBlank(rowId) {
-                    let row = document.getElementById("row-time-" + rowId + "-" + 2)
-                    let cell = document.createElement('td')
-                    cell.style.textAlign = "center"
-                    let textNode = document.createTextNode("n/a")
-                    row.appendChild(cell);
-                    cell.appendChild(textNode);
-                }
-
 
             })
 
         })
+
+}
+
+function encode(str) {
+    str = str.replace(/&/g, "&amp;");
+    str = str.replace(/>/g, "&gt;");
+    str = str.replace(/</g, "&lt;");
+    str = str.replace(/"/g, "&quot;");
+    str = str.replace(/'/g, "&#039;");
+    return str;
 }
 
