@@ -149,6 +149,7 @@ export function makeTable() {
                                 </tr>
                                 <tbody id="tbody-id-${movie.id}">
                                     <tr id="row-time-1000-${movie.id}">
+                                    
                                     </tr>
                                     <tr id="row-time-1245-${movie.id}">
                                      
@@ -185,11 +186,26 @@ export function makeTable() {
                     }
                 })
 
+                //1. fill out table(s) with blank cells using loops
+                //2. use showingDateAsInt to get the index of the specific cells we want (since it will be equal to the corresponding column)
+                //3. Use seomthing like document.getElementById("myTable").rows[0].cells[0].innerHTML to put in the data
+
                 //in each movie, for each showing to this:
                 //todo: put them in at correct dates
                 movie.showings.forEach(showing => {
 
-                    console.log("Showing " + showing.id + " at date: " + showing.date)
+                    //find out which day of the week the showing is, in order to later put it in the right column
+                    let showingDateAsInt = new Date(showing.date)
+                    showingDateAsInt = showingDateAsInt.getDay()
+
+                    //getDay sees sunday as the first day, so get it to use monday as starting day instead
+                    if(showingDateAsInt == 0) {
+                        showingDateAsInt = 6
+                    }   else {
+                            showingDateAsInt --
+                        }
+                    
+                    //console.log("Showing " + showing.id + " at date: " + showing.date)
 
                     //let row = document.createElement('tr');
                     let row = document.getElementById("row-time-1000-" + movieId)
@@ -201,10 +217,24 @@ export function makeTable() {
                     //find out which row to put it, based on showing time
                     if (textNode.nodeValue == "10:00") {
                         console.log("It's 10")
+                        console.log("Day int is: " + showingDateAsInt + ", " + typeof showingDateAsInt)
                         row = document.getElementById("row-time-1000-" + movieId)
+                        for(let i=0; i < 6; i++) {
+                            if(i < showingDateAsInt) {
+                                let cell = document.createElement('td')
+                                row.appendChild(cell);
+                            }
+                        }
+                        
                     } else if (textNode.nodeValue == "12:45") {
                         console.log("It's 12:45")
                         row = document.getElementById("row-time-1245-" + movieId)
+                        for(let i=0; i < 6; i++) {
+                            if(i < showingDateAsInt) {
+                                let cell = document.createElement('td')
+                                row.appendChild(cell);
+                            }
+                        }
                     } else if (textNode.nodeValue == "14:30") {
                         console.log("It's 14:30")
                         row = document.getElementById("row-time-1430-" + movieId)
