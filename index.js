@@ -4,6 +4,7 @@ import { loadJoke } from "./pages/joke/joke.js"
 import {addHandler, addHandlerLink} from "./pages/navigate/navigate.js";
 import { makeTable } from "./pages/products/products.js";
 import { renderText, setActiveLink, renderTemplate, loadTemplate} from "./utils.js"
+//import {addTicketOrder} from "./pages/order-tickets/orderTickets";
 
 window.addEventListener("load", async () => {
 
@@ -40,10 +41,12 @@ window.addEventListener("load", async () => {
     .on("/navigate-programatically", () => {
       renderTemplate(templateNavigate, "content")
       addHandler(router)
+      //addTicketOrder()
    })
     .on("/order-tickets", () => {
       renderTemplate(templateOrderTicket, "content")
         addHandlerLink(router)
+        //addTicketOrder()
     })
     .on("/ticket-ordered", () => {
         renderTemplate(templateTicketOrdered, "content")

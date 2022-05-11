@@ -6,8 +6,11 @@ export function addHandler(router) {
 }
 
 export function addHandlerLink(router) {
-    document.getElementById("btn").onclick = () => {
-        const route = document.getElementById("btn").value
-        router.navigate(route)
+    document.getElementById("btn").onclick = () => {//når vi klikker
+        const route = document.getElementById("btn").value//giv mig værdien på denne knap
+        router.navigate(route)//Naviger mig til denne route
+            .then()
     }
 }
+
+
