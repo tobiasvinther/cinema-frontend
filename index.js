@@ -1,10 +1,8 @@
 import "https://unpkg.com/navigo"  //Will create the global Navigo object used below
 
-import { loadJoke } from "./pages/joke/joke.js"
 import { createList } from "./pages/movielist/movielist.js";
-import { addHandler } from "./pages/navigate/navigate.js";
+import {addHandler, addHandlerLink} from "./pages/navigate/navigate.js";
 import { makeTable } from "./pages/products/products.js";
-//import { createList } from "./pages/movielist/movielist.js";
 import { renderText, setActiveLink, renderTemplate, loadTemplate} from "./utils.js"
 
 window.addEventListener("load", async () => {
@@ -12,6 +10,8 @@ window.addEventListener("load", async () => {
   const templateHome = await loadTemplate("./pages/home/home.html")
   const templateAbout = await loadTemplate("./pages/about/about.html")
   const templateProducts = await loadTemplate("./pages/products/products.html")
+  const templateOrderTicket = await loadTemplate("./pages/order-tickets/orderTickets.html")
+  const templateTicketOrdered = await loadTemplate("./pages/order-tickets/ticket-ordered.html")
   const templateJoke = await loadTemplate("./pages/joke/joke.html")
   const templateNavigate = await loadTemplate("./pages/navigate/navigate.html")
   const templateMovieList = await loadTemplate("./pages/movielist/movielist.html")
@@ -42,6 +42,14 @@ window.addEventListener("load", async () => {
       renderTemplate(templateNavigate, "content")
       addHandler(router)
    })
+    .on("/order-tickets", () => {
+      renderTemplate(templateOrderTicket, "content")
+        addHandlerLink(router)
+        //addTicketOrder()
+    })
+    .on("/ticket-ordered", () => {
+        renderTemplate(templateTicketOrdered, "content")
+      })
     .notFound(() => renderText("No page for this route found", "content"))
     .resolve()
 });
