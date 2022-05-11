@@ -1,8 +1,6 @@
 import "https://unpkg.com/navigo"  //Will create the global Navigo object used below
 
-import { loadJoke } from "./pages/joke/joke.js"
 import { createList } from "./pages/movielist/movielist.js";
-import { addHandler } from "./pages/navigate/navigate.js";
 import {addHandler, addHandlerLink} from "./pages/navigate/navigate.js";
 import { makeTable } from "./pages/products/products.js";
 import { renderText, setActiveLink, renderTemplate, loadTemplate} from "./utils.js"
