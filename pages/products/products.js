@@ -1,5 +1,5 @@
-//const URL = "https://cinema-sem3-backend.azurewebsites.net/api/movies"
-const URL = "http://localhost:8080/api/movies"
+const URL = "https://cinema-sem3-backend.azurewebsites.net/api/movies"
+//const URL = "http://localhost:8080/api/movies"
 
 let weekDates = []
 let today = new Date
