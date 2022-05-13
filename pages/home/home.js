@@ -1,5 +1,3 @@
-import {encode} from "../../utils.js"
-
 //const URL = "https://cinema-sem3-backend.azurewebsites.net/api/movies"
 const URL = "http://localhost:8080/api/movies"
 
