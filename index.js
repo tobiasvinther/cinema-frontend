@@ -4,6 +4,7 @@ import { createList } from "./pages/movielist/movielist.js";
 import {addHandler, addHandlerLink} from "./pages/navigate/navigate.js";
 import { makeTable } from "./pages/products/products.js";
 import { renderText, setActiveLink, renderTemplate, loadTemplate} from "./utils.js"
+import {sliderImages} from "./pages/home/home.js"
 
 window.addEventListener("load", async () => {
 
@@ -24,7 +25,10 @@ window.addEventListener("load", async () => {
         done()
       }
     })
-    .on("/", () => renderTemplate(templateHome, "content"))
+    .on("/", () => {
+      renderTemplate(templateHome, "content")
+      sliderImages()
+    })
     .on("/about", () => renderTemplate(templateAbout, "content"))
     .on("/products", (match) => {
       renderTemplate(templateProducts, "content")
