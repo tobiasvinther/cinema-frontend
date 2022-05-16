@@ -1,19 +1,35 @@
 <template>
     <form>
         <div class="container">
+            <h2 class="mb-3">Køb af billetter</h2>
+            <hr>
             <!--
             <label for="movie-id">Indsæt id</label>
             <input type="number" name="movie-id" id="movie-id">
             -->
-            <label for="amountOfTickets">Indsæt antal billetter</label>
-            <input type="number" name="amountOfTickets" id="amountOfTickets" required>
-           <!-- <label for="firstName">Indsæt fornavn</label>
-            <input type="text" name="firstName" id="firstName">
-            <label for="lastName">Indsæt efternavn</label>
-            <input type="text" name="lastName" id="lastName">
-            <label for="email">Indsæt email</label>
-            <input type="text" name="email" id="email"> -->
-            <button id="btn-order" type="submit" >Køb billet</button>
+            <div class="mb-3">
+                <p id="movie-title-id">N/A</p>
+            </div>
+            <div class="mb-3">
+                <p id="showing-date-id">Dato: </p>
+            </div>
+            <div class="mb-3">
+                <p id="showing-time-id">Kl. </p>
+            </div>
+
+            <form>
+                <div class="col-2 mb-3">
+                    <label class="form-label" for="amountOfTickets">Indsæt antal billetter</label>
+                    <input class="form-control" type="number" name="amountOfTickets" id="amountOfTickets" required>
+                </div>
+               <!-- <label for="firstName">Indsæt fornavn</label>
+                <input type="text" name="firstName" id="firstName">
+                <label for="lastName">Indsæt efternavn</label>
+                <input type="text" name="lastName" id="lastName">
+                <label for="email">Indsæt email</label>
+                <input type="text" name="email" id="email"> -->
+                <button class="btn btn-success" id="btn-order" type="submit" >Køb billet</button>
+            </form>
         </div>
     </form>
 </template>
