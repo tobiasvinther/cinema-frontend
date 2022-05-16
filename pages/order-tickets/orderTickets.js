@@ -12,13 +12,14 @@ export function addTicketOrder(match){
     movieID = match?.params?.id
 }
 
-export function loadShowing() {
+export function loadShowing(match) {
     //testArea
-    fetch(window.location.href.toString())
+    fetch(URL+match?.params?.id)
         .then(res => res.json())
         .then(fetchedShowing => {
-            console.log("HEllo")
-            console.log(fetchedShowing)
+            document.getElementById("movie-title-id").innerText = fetchedShowing.movieTitle
+            document.getElementById("showing-date-id").innerText = "Dato: " + fetchedShowing.date
+            document.getElementById("showing-time-id").innerText = "kl. " + fetchedShowing.time
         })
     //end testArea
 }
