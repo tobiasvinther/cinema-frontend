@@ -20,6 +20,7 @@ export function loadShowing(match) {
             document.getElementById("movie-title-id").innerText = fetchedShowing.movieTitle
             document.getElementById("showing-date-id").innerText = "Dato: " + fetchedShowing.date
             document.getElementById("showing-time-id").innerText = "kl. " + fetchedShowing.time
+            document.getElementById("showing-tickets-left-id").innerText = "Billetter tilbage: " + fetchedShowing.ticketsLeft
         })
     //end testArea
 }
