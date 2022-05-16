@@ -4,6 +4,7 @@ const URL = "https://cinema-sem3-backend.azurewebsites.net/api/movies"
 let weekDates = []
 let today = new Date
 today.toLocaleDateString("en-GB").slice(0, 5)
+let todayUnformatted = new Date
 
 function setDates1() {
     let curr = new Date
@@ -49,6 +50,10 @@ export function makeTable() {
 
                 //create formattede showing dates for the week
                 movie.showings.forEach(showings => {
+
+                    let showingDateUnformatted = new Date(showings.date)
+                    console.log("Today: " + todayUnformatted + " vs. " + showingDateUnformatted)
+
                     console.log("Date and time for showing: " + showings.date + " " + showings.time)
 
                     let showingDateFormatted = showings.date.slice(5, 10).replace(/-/g, "/")
