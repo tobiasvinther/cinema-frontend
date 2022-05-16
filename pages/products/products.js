@@ -179,7 +179,7 @@ export function makeTable() {
                     if (textNode.nodeValue == "10:00") {
                         console.log("It's 10")
                         console.log("Day int is: " + showingDateAsInt + ", " + typeof showingDateAsInt)
-                        document.getElementById("row-time-1000-" + movieId).cells[showingDateAsInt].innerHTML = `<a style="text-decoration:none; color: black;" href="#/order-tickets?id=${showing.id}" role="button">${textNode.nodeValue}</a>`
+                        document.getElementById("row-time-1000-" + movieId).cells[showingDateAsInt].innerHTML = `<a data-navigo style="text-decoration:none; color: black;" href="#/order-tickets?id=${showing.id}" role="button">${textNode.nodeValue}</a>`
                         
                     } else if (textNode.nodeValue == "12:45") {
                         console.log("It's 12:45")

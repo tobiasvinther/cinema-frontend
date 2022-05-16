@@ -3,6 +3,7 @@ import "https://unpkg.com/navigo"  //Will create the global Navigo object used b
 import { createList } from "./pages/movielist/movielist.js";
 import {addHandler, addHandlerLink} from "./pages/navigate/navigate.js";
 import { makeTable } from "./pages/products/products.js";
+import {addTicketOrder, loadShowing} from "./pages/order-tickets/orderTickets.js";
 import { renderText, setActiveLink, renderTemplate, loadTemplate} from "./utils.js"
 
 window.addEventListener("load", async () => {
@@ -42,10 +43,11 @@ window.addEventListener("load", async () => {
       renderTemplate(templateNavigate, "content")
       addHandler(router)
    })
-    .on("/order-tickets", () => {
+    .on("/order-tickets", (match) => {
       renderTemplate(templateOrderTicket, "content")
-        addHandlerLink(router)
-        //addTicketOrder()
+        //addHandlerLink(router)
+        loadShowing(match)
+        addTicketOrder(match)
     })
     .on("/ticket-ordered", () => {
         renderTemplate(templateTicketOrdered, "content")
