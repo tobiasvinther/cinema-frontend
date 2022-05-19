@@ -43,9 +43,9 @@ export function makeTable() {
                 console.log("Im creating a table for: " + movie.name)
 
                 //modal stuff (not working correcetly)
-                let exampleModal = document.getElementById('exampleModal')
-                let modalTitle = exampleModal.querySelector('.modal-title')
-                modalTitle.innerText = movie.name
+                //let exampleModal = document.getElementById('exampleModal')
+                //let modalTitle = exampleModal.querySelector('.modal-title')
+                //modalTitle.innerText = movie.name
 
 
                 //create formattede showing dates for the week
