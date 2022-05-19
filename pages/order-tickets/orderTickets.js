@@ -1,4 +1,5 @@
-const URL = "http://localhost:8080/api/order-tickets/"
+//const URL = "http://localhost:8080/api/order-tickets/"
+const URL = "https://cinema-sem3-backend.azurewebsites.net/api/order-tickets/"
 
 //import{SERVER}from "../../settings.js"
 import {makeOptions} from "../../fetchUtils.js";
